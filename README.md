@@ -9,4 +9,4 @@ Minishell project is divided into 4 distinct parts:
 - Executor: Is the one in charge of executing the final command.
 
 ## Sources
-- [Getting Started] (https://harm-smits.github.io/42docs/projects/minishell)
+- [Getting Started](https://harm-smits.github.io/42docs/projects/minishell)
