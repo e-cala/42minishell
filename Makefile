@@ -36,11 +36,10 @@ RM			=		rm -rf
 ifeq ($(OS), Linux)
 	SYSTEM_RULE := linux
 else
-	SYSTEM_RULE := all
+	SYSTEM_RULE := $(NAME)
 endif
 
-all:
-	make $(SYSTEM_RULE)
+all: $(SYSTEM_RULE)
 
 libft:
 	make -C lib/libft
