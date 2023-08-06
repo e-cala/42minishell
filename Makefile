@@ -12,6 +12,8 @@
 
 NAME		=		minishell
 HEADER		=		includes/minishell.h
+USERNAME	:=		$(shell whoami)
+OS		:=		$(shell uname)
 
 SRC			=		src
 OBJ			=		obj
@@ -19,9 +21,10 @@ SRCS		=		$(wildcard $(SRC)/*.c)
 OBJS		=		$(patsubst $(SRC)/%.c, $(OBJ)/%.o, $(SRCS))
 DEPS		=		$(addsuffix .d, $(basename $(SRCS)))
 
+
 LIBFT		=		-L ./lib/libft -lft
-LREADLINE	=		-L /Users/ecabanas/.brew/Cellar/readline/8.2.1/lib
-IREADLINE	=		-I /Users/ecabanas/.brew/Cellar/readline/8.2.1/lib/libreadline.dylib
+LREADLINE	=		-L /Users/$(USERNAME)/.brew/Cellar/readline/8.2.1/lib
+IREADLINE	=		-I /Users/$(USERNAME)/.brew/Cellar/readline/8.2.1/lib/libreadline.dylib
 
 CC			=		gcc
 CFLAGS		=		-Wall -Wextra -Werror -MMD
@@ -30,7 +33,14 @@ RM			=		rm -rf
 
 ######################################################################
 
-all: $(NAME)
+ifeq ($(OS), Linux)
+	SYSTEM_RULE := linux
+else
+	SYSTEM_RULE := all
+endif
+
+all:
+	make $(SYSTEM_RULE)
 
 libft:
 	make -C lib/libft
@@ -39,6 +49,7 @@ $(NAME):  libft $(OBJS)
 	$(CC) $(CFLAGS) $(LREADLINE) $(LIBFT) $(IREADLINE) -lreadline $(OBJS) -o $@
 
 linux: libft $(OBJS)
+	echo $(USERNAME)
 	$(CC) $(CFLAGS) $(LIBFT) $(OBJS) -lreadline -o $(NAME)
 
 $(OBJ)/%.o: $(SRC)/%.c $(OBJ)
