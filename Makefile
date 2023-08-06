@@ -48,7 +48,6 @@ $(NAME):  libft $(OBJS)
 	$(CC) $(CFLAGS) $(LREADLINE) $(LIBFT) $(IREADLINE) -lreadline $(OBJS) -o $@
 
 linux: libft $(OBJS)
-	echo $(USERNAME)
 	$(CC) $(CFLAGS) $(LIBFT) $(OBJS) -lreadline -o $(NAME)
 
 $(OBJ)/%.o: $(SRC)/%.c $(OBJ)
