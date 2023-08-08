@@ -3,7 +3,7 @@
 #include <readline/history.h>
 #include <stdlib.h>
 
-int	main(void)
+/*int	main(void)
 {
 	char	*input;
 
@@ -13,4 +13,4 @@ int	main(void)
 	free(input);
 
 	return (0);
-}
+}*/
