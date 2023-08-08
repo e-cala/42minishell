@@ -10,11 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-
-char	**cmdtrim(char *s);
+#include "../includes/minishell.h"
 
 int	main(void)
 {

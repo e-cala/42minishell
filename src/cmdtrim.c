@@ -10,11 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-
-char	*ft_substring(char *s, unsigned int start, size_t len);
+#include "../includes/minishell.h"
 
 static char	*ft_find_ptr(char *p)
 {

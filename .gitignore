@@ -1,7 +1,4 @@
 minishell
-.out
-.*.swp
-.DS_Store
 
 # Prerequisites
 *.d

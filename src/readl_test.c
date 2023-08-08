@@ -1,7 +1,4 @@
-#include <stdio.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-#include <stdlib.h>
+#include "../includes/minishell.h"
 
 /*int	main(void)
 {

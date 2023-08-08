@@ -10,13 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-
-char	*ft_substring(char *s, unsigned int start, size_t len);
-size_t	ft_strlen(const char *s);
-size_t	ft_strlcpy(char *restrict dst, const char *restrict src, size_t dstsize);
+#include "../includes/minishell.h"
 
 static char	*ft_strdup(char *s1)
 {
