@@ -10,3 +10,5 @@ Minishell project is divided into 4 distinct parts:
 
 ## Sources
 - [Getting Started](https://harm-smits.github.io/42docs/projects/minishell)
+- [Pipex YouTube](https://harm-smits.github.io/42docs/projects/minishell](https://www.youtube.com/watch?v=cex9XrZCU14&list=PLfqABt5AS4FkW5mOn2Tn9ZZLLDwA3kZUY)https://www.youtube.com/watch?v=cex9XrZCU14&list=PLfqABt5AS4FkW5mOn2Tn9ZZLLDwA3kZUY)
+
