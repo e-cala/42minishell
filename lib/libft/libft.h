@@ -24,6 +24,11 @@ typedef struct s_list
 }	t_list;
 
 /* libc */
+
+char		*find_ptr(char const *ptr, char c);
+
+char		**free_all(char	**res, int n);
+
 int			ft_abs(int num);
 
 int			ft_isalpha(int c);

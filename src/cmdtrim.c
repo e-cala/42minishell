@@ -11,31 +11,23 @@
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-static char	*ft_find_ptr(char *p)
-{
-	while (*p == ' '  && *p)
-		p++;
-	return (p);
-}
+#include "../includes/defines.h"
+#include "../lib/libft/libft.h"
 
 static int	ft_ptr_len(char const *p)
 {
 	int	i;
 
 	i = 0;
-	if (p[0] == 34)
+	if (p[i++] == DQUOTE)
 	{
-		i++;
-		while (p[i] != 34)
+		while (p[i] != DQUOTE)
 			i++;
 		i++;
 	}
 	else
-	{
-		while (p[i] != ' ' && p[i])
+		while (p[i] != SPACE && p[i])
 			i++;
-	}
 	return (i);
 }
 
@@ -50,36 +42,25 @@ int	ft_str_count(char *s)
 		return (0);
 	while (s[j])
 	{
-		while (s[j] && s[j] == ' ')
+		while (s[j] && s[j] == SPACE)
 			j++;
-		if (s[j] == 34)
+		if (s[j] == DQUOTE)
 		{
 			str_count++;
 			j++;
-			while (s[j] && s[j] != 34)
+			while (s[j] && s[j] != DQUOTE)
 				j++;
-			if (s[j] == 34)
+			if (s[j] == DQUOTE)
 				j++;
 		}
 		else if (s[j])
 		{
 			str_count++;
-			while (s[j] && s[j] != ' ' && s[j] != 34)
+			while (s[j] && s[j] != SPACE && s[j] != DQUOTE)
 				j++;
 		}
 	}
 	return (str_count);
-}
-
-char	**free_all(char	**res, int n)
-{
-	while (n >= 0)
-	{
-		free(res[n]);
-		n--;
-	}
-	free(res);
-	return (NULL);
 }
 
 char	**cmdtrim(char *s)
@@ -99,8 +80,8 @@ char	**cmdtrim(char *s)
 		return (NULL);
 	while (n < str_count)
 	{
-		p = ft_find_ptr(s);
-		res[n] = ft_substring(p, 0, ft_ptr_len(p));
+		p = find_ptr(s, SPACE);
+		res[n] = ft_substr(p, 0, ft_ptr_len(p));
 		if (res[n] == NULL)
 			return (free_all(res, n));
 		n++;

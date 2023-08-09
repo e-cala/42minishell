@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-static	char	**free_all(char	**res, int n)
+char	**free_all(char	**res, int n)
 {
 	while (n >= 0)
 	{
@@ -23,7 +23,7 @@ static	char	**free_all(char	**res, int n)
 	return (0);
 }
 
-static char	*find_ptr(char const *ptr, char c)
+char	*find_ptr(char const *ptr, char c)
 {
 	while (*ptr == c && *ptr)
 		ptr++;

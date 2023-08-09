@@ -20,10 +20,8 @@
 # include <readline/history.h>
 
 char	**cmdtrim(char *s);
-char	*ft_substring(char *s, unsigned int start, size_t len);
 size_t	ft_strlen(const char *s);
 size_t	ft_strlcpy(char *restrict dst, const char *restrict src, size_t dstsize);
-char	*ft_substring(char *s, unsigned int start, size_t len);
 
 
 
