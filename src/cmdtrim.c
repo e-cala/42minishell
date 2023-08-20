@@ -19,9 +19,17 @@ static int	ft_ptr_len(char const *p)
 	int	i;
 
 	i = 0;
-	if (p[i++] == DQUOTE)
+	if (p[i] == DQUOTE)
 	{
+		i++;
 		while (p[i] != DQUOTE)
+			i++;
+		i++;
+	}
+	else if (p[i] == SQUOTE)
+	{
+		i++;
+		while (p[i] != SQUOTE)
 			i++;
 		i++;
 	}
@@ -53,10 +61,20 @@ int	ft_str_count(char *s)
 			if (s[j] == DQUOTE)
 				j++;
 		}
+		else if (s[j] == SQUOTE)
+		{
+			printf("s[j] = squote\n");
+			str_count++;
+			j++;
+			while (s[j] && s[j] != SQUOTE)
+				j++;
+			if (s[j] == SQUOTE)
+				j++;
+		}
 		else if (s[j])
 		{
 			str_count++;
-			while (s[j] && s[j] != SPACE && s[j] != DQUOTE)
+			while (s[j] && s[j] != SPACE && s[j] != DQUOTE && s[j] != SQUOTE)
 				j++;
 		}
 	}
