@@ -1,6 +1,6 @@
 #include "../includes/minishell.h"
 
-/*int	main(void)
+int	readl_test(void)
 {
 	char	*input;
 
@@ -10,4 +10,4 @@
 	free(input);
 
 	return (0);
-}*/
+}

@@ -14,7 +14,8 @@
 
 int	main(void)
 {
-	char	cmd[100] = "echo \"hello      there\" how are 'you 'doing? $USER |wc -l >outfile";
+	readl_test();
+	/*char	cmd[100] = "echo \"hello      there\" how are 'you 'doing? $USER |wc -l >outfile";
 	char	**trimmed;
 	int	i = 0;
 	
@@ -23,6 +24,6 @@ int	main(void)
 	{
 		printf("trimmed[%i]: %s\n", i, trimmed[i]);
 		i++;
-	}
+	}*/
 	return (0);
 }
