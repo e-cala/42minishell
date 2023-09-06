@@ -15,7 +15,7 @@
 
 #define SQUOTE	39
 #define DQUOTE	34
-#define SPACE	32
+#define KSPACE	32
 
 
 #endif

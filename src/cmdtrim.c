@@ -34,7 +34,7 @@ static int	ft_ptr_len(char const *p)
 		i++;
 	}
 	else
-		while (p[i] != SPACE && p[i])
+		while (p[i] != KSPACE && p[i])
 			i++;
 	return (i);
 }
@@ -50,7 +50,7 @@ int	ft_str_count(char *s)
 		return (0);
 	while (s[j])
 	{
-		while (s[j] && s[j] == SPACE)
+		while (s[j] && s[j] == KSPACE)
 			j++;
 		if (s[j] == DQUOTE)
 		{
@@ -74,7 +74,7 @@ int	ft_str_count(char *s)
 		else if (s[j])
 		{
 			str_count++;
-			while (s[j] && s[j] != SPACE && s[j] != DQUOTE && s[j] != SQUOTE)
+			while (s[j] && s[j] != KSPACE && s[j] != DQUOTE && s[j] != SQUOTE)
 				j++;
 		}
 	}
@@ -98,7 +98,7 @@ char	**cmdtrim(char *s)
 		return (NULL);
 	while (n < str_count)
 	{
-		p = find_ptr(s, SPACE);
+		p = find_ptr(s, KSPACE);
 		res[n] = ft_substr(p, 0, ft_ptr_len(p));
 		if (res[n] == NULL)
 			return (free_all(res, n));
