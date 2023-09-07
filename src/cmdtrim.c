@@ -25,6 +25,8 @@ static int	ft_ptr_len(char const *p)
 		while (p[i] != DQUOTE)
 			i++;
 		i++;
+		while (p[i] && p[i] != KSPACE)
+			i++;
 	}
 	else if (p[i] == SQUOTE)
 	{
@@ -32,6 +34,8 @@ static int	ft_ptr_len(char const *p)
 		while (p[i] != SQUOTE)
 			i++;
 		i++;
+		while (p[i] && p[i] != KSPACE)
+			i++;
 	}
 	else
 		while (p[i] != KSPACE && p[i])
@@ -60,6 +64,8 @@ int	ft_str_count(char *s)
 				j++;
 			if (s[j] == DQUOTE)
 				j++;
+			while (s[j] && s[j] != KSPACE)
+				j++;
 		}
 		else if (s[j] == SQUOTE)
 		{
@@ -69,6 +75,8 @@ int	ft_str_count(char *s)
 			while (s[j] && s[j] != SQUOTE)
 				j++;
 			if (s[j] == SQUOTE)
+				j++;
+			while (s[j] && s[j] != KSPACE)
 				j++;
 		}
 		else if (s[j])

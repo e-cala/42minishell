@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   cmdtrim.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: erosas-c <erosas-c@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/04 17:38:52 by erosas-c          #+#    #+#             */
-/*   Updated: 2023/08/04 17:39:15 by yourLogin        ###   ########.fr       */
+/*   Created: 2023/08/04 17:42:52 by erosas-c          #+#    #+#             */
+/*   Updated: 2023/08/04 17:43:15 by yourLogin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+#include "../includes/defines.h"
+#include "../lib/libft/libft.h"
 
-int	main(void)
+/*char	**cmdsubsplit(char **s)
 {
-	//readl_test();
-	char	cmd[100] = "echo \"hello      there\" how are 'you 'doing? $USER |wc -l >outfile";
-	char	**trimmed;
-	int	i = 0;
-	
-	trimmed = cmdtrim(cmd);
-	while (trimmed[i])
-	{
-		printf("trimmed[%i]: %s\n", i, trimmed[i]);
-		i++;
-	}
-	return (0);
-}
+
+
+
+
+
+
+
+}*/
