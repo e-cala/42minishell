@@ -6,13 +6,36 @@
 /*   By: erosas-c <erosas-c@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 17:42:52 by erosas-c          #+#    #+#             */
-/*   Updated: 2023/08/04 17:43:15 by yourLogin        ###   ########.fr       */
+/*   Updated: 2023/09/08 20:11:42 by erosas-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 #include "../includes/defines.h"
 #include "../lib/libft/libft.h"
+
+static int	ft_upd_j(char *s, int j)
+{
+	if (s[j] == DQUOTE)
+	{
+		j++;
+		while (s[j] && s[j] != DQUOTE)
+			j++;
+		if (s[j] == DQUOTE)
+			j++;
+	}
+	else
+	{
+		j++;
+		while (s[j] && s[j] != SQUOTE)
+			j++;
+		if (s[j] == SQUOTE)
+			j++;
+	}
+	while (s[j] && s[j] != KSPACE)
+		j++;
+	return (j);
+}
 
 static int	ft_ptr_len(char const *p)
 {
@@ -56,28 +79,10 @@ int	ft_str_count(char *s)
 	{
 		while (s[j] && s[j] == KSPACE)
 			j++;
-		if (s[j] == DQUOTE)
+		if (s[j] == DQUOTE || s[j] == SQUOTE)
 		{
 			str_count++;
-			j++;
-			while (s[j] && s[j] != DQUOTE)
-				j++;
-			if (s[j] == DQUOTE)
-				j++;
-			while (s[j] && s[j] != KSPACE)
-				j++;
-		}
-		else if (s[j] == SQUOTE)
-		{
-			printf("s[j] = squote\n");
-			str_count++;
-			j++;
-			while (s[j] && s[j] != SQUOTE)
-				j++;
-			if (s[j] == SQUOTE)
-				j++;
-			while (s[j] && s[j] != KSPACE)
-				j++;
+			j = ft_upd_j(s, j);
 		}
 		else if (s[j])
 		{
