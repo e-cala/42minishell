@@ -16,10 +16,8 @@
 
 static char	*first_spl(char *tr)
 {
-	int		i;
 	char	*sp;
 
-	i = 0;
 	if (tr[0] == '|' || (tr[0] != tr[1]))
 	{
 		sp = malloc (sizeof(char) + 1);
