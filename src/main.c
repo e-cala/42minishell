@@ -6,7 +6,7 @@
 /*   By: erosas-c <erosas-c@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 17:38:52 by erosas-c          #+#    #+#             */
-/*   Updated: 2023/09/13 19:00:26 by erosas-c         ###   ########.fr       */
+/*   Updated: 2023/09/14 18:02:52 by erosas-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,26 @@ char	*rl_gets(char *line)
 
 void	loop_prompt(char *line)
 {
+	int i = 0;
+
 	if (line == NULL)
 	{
 		line = rl_gets(line);
-		printf("%s\n",cmdtrim(line)[0]); //have to make it print the first time we write it
+		while (cmdtrim(line)[i])
+		{
+			printf("%s\n", cmdtrim(line)[i]); //have to make it print the first time we write it
+			i++;
+		}
 	}
 	while (ft_strncmp(line, "exit", 4) != 0)
 	{
 		line = rl_gets(line);
-		printf("%s\n",cmdtrim(line)[0]); //have to make it print the first time we write it
+		i = 0;
+		while (cmdtrim(line)[i])
+		{
+			printf("%s\n", cmdtrim(line)[i]); //have to make it print the first time we write it
+			i++;
+		}
 	}
 	free(line);
 	return ;
