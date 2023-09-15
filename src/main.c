@@ -6,7 +6,7 @@
 /*   By: erosas-c <erosas-c@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 17:38:52 by erosas-c          #+#    #+#             */
-/*   Updated: 2023/09/14 18:02:52 by erosas-c         ###   ########.fr       */
+/*   Updated: 2023/09/15 20:43:18 by erosas-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ char	*rl_gets(char *line)
 void	loop_prompt(char *line)
 {
 	int i = 0;
+	int j = 0;
 
 	if (line == NULL)
 	{
@@ -39,16 +40,29 @@ void	loop_prompt(char *line)
 			printf("%s\n", cmdtrim(line)[i]); //have to make it print the first time we write it
 			i++;
 		}
+		cmdsubsplit(cmdtrim(line), i);
+	/*	while (cmdsubsplit(cmdtrim(line), i)[j])
+		{
+			printf("%s\n", cmdsubsplit(cmdtrim(line), i)[j]); //have to make it print the first time we write it
+			j++;
+		}*/
 	}
 	while (ft_strncmp(line, "exit", 4) != 0)
 	{
 		line = rl_gets(line);
 		i = 0;
+		j = 0;
 		while (cmdtrim(line)[i])
 		{
 			printf("%s\n", cmdtrim(line)[i]); //have to make it print the first time we write it
 			i++;
 		}
+		cmdsubsplit(cmdtrim(line), i);
+		/*while (cmdsubsplit(cmdtrim(line), i)[j])
+		{
+			printf("%s\n", cmdsubsplit(cmdtrim(line), i)[j]); //have to make it print the first time we write it
+			j++;
+		}*/
 	}
 	free(line);
 	return ;
@@ -63,42 +77,3 @@ int main(int argc, char **argv, char **envp)
 	loop_prompt(line);
 	return(0);
 }
-/*
-int	main(void)
-{
-	char	cmd[100] = "echo \"hello      there\" how are 'you 'doing? $USER |wc -l <outfile";
-	char	**trimmed;
-	char	**subsplitted;
-	char	**parsed;
-	int		i = 0;
-
-	trimmed = cmdtrim(cmd);
-	while (trimmed[i])
-		i++;
-	{
-		printf("trimmed[%i]: %s\n", i, trimmed[i]);
-		i++;
-	}
-	subsplitted = cmdsubsplit(trimmed, i);
-	free_all(trimmed, i - 1);
-	i = 0;
-	while (subsplitted[i])
-	{
-		printf("subsplitted[%i]: %s\n", i, subsplitted[i]);
-		i++;
-	}
-	i = 0;
-	while (subsplitted[i])
-	{
-		printf("subsplitted[%i]: %s\n", i, subsplitted[i]);
-		i++;
-	}
-	i = 0;
-	if (incl_envvar(subsplitted) == 1)
-	{	
-		parsed = parser(subsplitted, i);
-		free_all(subsplitted, i - 1);
-	}
-
-	return (0);
-}*/

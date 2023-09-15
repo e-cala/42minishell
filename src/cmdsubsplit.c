@@ -6,7 +6,7 @@
 /*   By: erosas-c <erosas-c@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 17:42:52 by erosas-c          #+#    #+#             */
-/*   Updated: 2023/09/09 12:59:24 by erosas-c         ###   ########.fr       */
+/*   Updated: 2023/09/15 20:47:36 by erosas-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,13 +83,43 @@ static int	count_new_ptrs(char **s)
 	return (num);
 }
 
+static int	need_split(char **s)
+{
+	int i;
+
+	i = 0;
+	while (s[i])
+	{
+		if (ft_strlen(s[i]) > 2 && ft_strchr(s[i], '<'))
+			return (1);
+		else if (ft_strlen(s[i]) > 2 && ft_strchr(s[i], '>'))
+			return (1);
+		else if (ft_strlen(s[i]) > 1 && ft_strchr(s[i], '|'))
+			return (1);
+		else if (ft_strlen(s[i]) == 2 && ft_strchr(s[i], '<') && s[i][0] != s[i][1])
+			return (1);
+		else if (ft_strlen(s[i]) == 2 && ft_strchr(s[i], '>') && s[i][0] != s[i][1])
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 char	**cmdsubsplit(char **s, int len)
 {
 	char	**res;
 
-	res = malloc (sizeof(char *) * (count_new_ptrs(s) + len + 1));
-	if (!res)
-		return (NULL);
-	res = trimtosplit(s, res);
+	res = NULL;
+	printf("needs split?: %i\n", need_split(s));
+	if (!need_split(s))
+		return (s);
+	else
+	{
+		res = malloc (sizeof(char *) * (count_new_ptrs(s) + len + 1)); //NEED TO REDO THIS COUNTING FUNCTION
+		//jo crec que podem fer una 1a divisio i dpres iterar per si en queden... (casos de cadenes amb 2 o + separadors)
+		if (!res)
+			return (NULL);
+		res = trimtosplit(s, res);
+	}
 	return (res);
 }
