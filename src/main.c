@@ -30,7 +30,7 @@ char	*rl_gets(char *line)
 void	loop_prompt(char *line)
 {
 	int i = 0;
-	int j = 0;
+//	int j = 0;
 
 	if (line == NULL)
 	{
@@ -51,7 +51,7 @@ void	loop_prompt(char *line)
 	{
 		line = rl_gets(line);
 		i = 0;
-		j = 0;
+	//	j = 0;
 		while (cmdtrim(line)[i])
 		{
 			printf("%s\n", cmdtrim(line)[i]); //have to make it print the first time we write it

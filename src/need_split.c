@@ -64,6 +64,8 @@ static int	incl_sep(char **s)
 	{
 		if (!ft_strchr(s[i], '<') && !ft_strchr(s[i], '>') && !ft_strchr(s[i], '|'))
 			i++;
+		else
+			break ;
 	}
 	if (i != len)
 		return (1);
@@ -72,9 +74,9 @@ static int	incl_sep(char **s)
 
 int	need_split(char **s)
 {
-	int	i;
+	//int	i;
 
-	i = 0;
+	//i = 0;
 	if (!incl_sep(s)) //check if the **s includes some separator: <, > OR |
 		return (0);
 	if (seps_alone(s)) //check if seps are alone so would need no split
