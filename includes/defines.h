@@ -18,7 +18,13 @@
 # define SQUOTE	39
 # define DQUOTE	34
 # define KSPACE	32
-
+/*
+typedef struct s_list
+{
+	void			*content;
+	struct s_list	*next;
+}	t_list;
+*/
 typedef struct s_prompt
 {
 	t_list	*cmds;

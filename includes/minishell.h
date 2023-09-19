@@ -25,7 +25,9 @@ size_t	ft_strlcpy(char *restrict dst, const char *restrict src, size_t dstsize);
 int		readl_test(void);
 char	**cmdsubsplit(char **s, int len);
 int		need_split(char **s);
-
+char    *rl_gets(char *line);
+void    loop_prompt(char *line);
+char    *get_env_value(char *key, char **envp);
 
 
 
