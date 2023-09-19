@@ -6,42 +6,13 @@
 /*   By: erosas-c <erosas-c@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 13:10:36 by erosas-c          #+#    #+#             */
-/*   Updated: 2023/09/18 20:31:48 by erosas-c         ###   ########.fr       */
+/*   Updated: 2023/09/19 20:44:01 by erosas-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 #include "../includes/defines.h"
 #include "../lib/libft/libft.h"	
-
-static int	next_quote(char *p, int i, char c)
-{
-	i++;
-	while (p[i] && p[i] != c)
-		i++;
-	if (p[i] == c)
-		i++;
-	return (i);
-}
-
-static int	sep_betq(char *p)
-{
-	int	i;
-
-	i = 0;
-	while (p[i])
-	{
-		if ((p[i] == '<' || p[i] == '>' || p[i] == '|'))
-			return (0);
-		else if (p[i] == SQUOTE)
-			i = next_quote(p, i, SQUOTE);
-		else if (p[i] == DQUOTE)
-			i = next_quote(p, i, DQUOTE);
-		else
-			i++;
-	}
-	return (1);
-}
 
 static int	sep_outq(char **s)
 {
@@ -50,15 +21,10 @@ static int	sep_outq(char **s)
 	i = 0;
 	while (s[i])
 	{
-		if (!ft_strchr(s[i], '<') && !ft_strchr(s[i], '>')
-			&& !ft_strchr(s[i], '|'))
-			i++;
-		else if (!ft_strchr(s[i], SQUOTE) && !ft_strchr(s[i], DQUOTE))
+		if (out_quotes(s[i]))
 			return (1);
-		else if (sep_betq(s[i]))
-			i++;
 		else
-			return (1);
+			i++;
 	}
 	return (0);
 }
@@ -70,19 +36,11 @@ static int	seps_alone(char **s)
 	i = 0;
 	while (s[i])
 	{
-		if (ft_strlen(s[i]) > 2 && ft_strchr(s[i], '<'))
+		if ((!ft_strchr(s[i], '<') && !ft_strchr(s[i], '>')
+				&& !ft_strchr(s[i], '|')) || only_sep(s[i]))
+			i++;
+		else
 			return (0);
-		else if (ft_strlen(s[i]) > 2 && ft_strchr(s[i], '>'))
-			return (0);
-		else if (ft_strlen(s[i]) > 1 && ft_strchr(s[i], '|'))
-			return (0);
-		else if (ft_strlen(s[i]) == 2 && ft_strchr(s[i], '<')
-			&& s[i][0] != s[i][1])
-			return (0);
-		else if (ft_strlen(s[i]) == 2 && ft_strchr(s[i], '>')
-			&& s[i][0] != s[i][1])
-			return (0);
-		i++;
 	}
 	return (1);
 }

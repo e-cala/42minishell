@@ -6,7 +6,7 @@
 /*   By: erosas-c <erosas-c@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 17:42:52 by erosas-c          #+#    #+#             */
-/*   Updated: 2023/09/16 13:17:48 by erosas-c         ###   ########.fr       */
+/*   Updated: 2023/09/19 20:53:15 by erosas-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,18 +68,21 @@ static int	count_new_ptrs(char **s)
 {
 	int	num;
 	int	i;
-	int	len;
 
 	num = 0;
 	i = 0;
-	len = 0;
 	while (s[i])
 	{
-		len = ft_strlen(s[i]);
-		if ((s[i][0] == '<' || s[i][0] == '>' || s[i][0] == '|') && len > 1)
+		if ((!ft_strchr(s[i], '<') && !ft_strchr(s[i], '>')
+				&& !ft_strchr(s[i], '|')) || only_sep(s[i]))
+			i++;
+		else
+		{
 			num++;
-		i++;
+			i++;
+		}
 	}
+	printf("num new strings: %i\n", num);
 	return (num);
 }
 
