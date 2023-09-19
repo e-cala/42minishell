@@ -6,7 +6,7 @@
 /*   By: erosas-c <erosas-c@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 17:38:52 by erosas-c          #+#    #+#             */
-/*   Updated: 2023/09/15 20:43:18 by erosas-c         ###   ########.fr       */
+/*   Updated: 2023/09/19 21:03:46 by erosas-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,39 +30,48 @@ char	*rl_gets(char *line)
 void	loop_prompt(char *line)
 {
 	int i = 0;
-//	int j = 0;
+	int j = 0;
+	char **cmd;
 
 	if (line == NULL)
 	{
 		line = rl_gets(line);
-		while (cmdtrim(line)[i])
+		cmd = cmdtrim(line);
+		while (cmd[i])
 		{
-			printf("%s\n", cmdtrim(line)[i]); //have to make it print the first time we write it
+			printf("%s\n", cmd[i]); //have to make it print the first time we write it
 			i++;
 		}
-		cmdsubsplit(cmdtrim(line), i);
-	/*	while (cmdsubsplit(cmdtrim(line), i)[j])
+//		i = 0;
+	//	cmdsubsplit(cmdtrim(line), i);
+		if (need_split(cmd))
+			cmd = cmdsubsplit(cmd, i);
+		while (cmd[j])
 		{
-			printf("%s\n", cmdsubsplit(cmdtrim(line), i)[j]); //have to make it print the first time we write it
+			printf("%s\n", cmd[j]); //have to make it print the first time we write it
 			j++;
-		}*/
+		}
 	}
 	while (ft_strncmp(line, "exit", 4) != 0)
 	{
 		line = rl_gets(line);
 		i = 0;
-	//	j = 0;
-		while (cmdtrim(line)[i])
+		j = 0;
+		cmd = cmdtrim(line);
+		while (cmd[i])
 		{
-			printf("%s\n", cmdtrim(line)[i]); //have to make it print the first time we write it
+			printf("%s\n", cmd[i]); //have to make it print the first time we write it
 			i++;
 		}
-		cmdsubsplit(cmdtrim(line), i);
-		/*while (cmdsubsplit(cmdtrim(line), i)[j])
+//		i = 0;
+	//	cmdsubsplit(cmdtrim(line), i);
+		if (need_split(cmd))
+			cmd = cmdsubsplit(cmd, i);
+		while (cmd[j])
 		{
-			printf("%s\n", cmdsubsplit(cmdtrim(line), i)[j]); //have to make it print the first time we write it
+			printf("%s\n", cmd[j]); //have to make it print the first time we write it
 			j++;
-		}*/
+		}
 	}
 	free(line);
 	return ;
