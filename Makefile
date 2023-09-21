@@ -48,7 +48,7 @@ $(NAME):  libft $(OBJS)
 	$(CC) $(CFLAGS) $(LREADLINE) $(LIBFT) $(IREADLINE) -lreadline $(OBJS) -o $@
 
 linux: libft $(OBJS)
-	$(CC) $(CFLAGS) $(LIBFT) $(OBJS) -lreadline -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -lreadline -o $(NAME)
 
 $(OBJ)/%.o: $(SRC)/%.c $(OBJ)
 	$(CC) $(CFLAGS) -c $< -o $@
