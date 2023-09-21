@@ -16,6 +16,7 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
+#include <errno.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 
@@ -35,6 +36,12 @@ int		out_quotes(char *s);
 /*      testfunctions.c        */
 void	test(char *line);
 
+/*      builtins.c            */
+void    ft_echo(const char *message);
+void     ft_pwd();
+
+/*      errors.c            */
+void    handle_error(const char *message);
 
 
 

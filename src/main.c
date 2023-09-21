@@ -12,8 +12,9 @@
 
 #include "../includes/minishell.h"
 #include "../includes/defines.h"
+#include <fcntl.h>
 
-int main(int argc, char **argv, char **envp)
+/* int main(int argc, char **argv, char **envp)
 {
 	(void)argv;
 	(void)argc;
@@ -21,4 +22,24 @@ int main(int argc, char **argv, char **envp)
 	static char *line = NULL;
 	loop_prompt(line);
 	return(0);
+}
+ */
+#define MAX_PATH_LEN 800
+ int main() {
+    char cwd[MAX_PATH_LEN];
+    ssize_t len;
+
+    int fd = open("/proc/self/fd", 0);
+    if (fd < 0)
+        handle_error("Failed to open /proc/self/fd");
+
+    len = readlink("/proc/self/fd", cwd, MAX_PATH_LEN - 1);
+    if (len < 0)
+        handle_error("Failed to read symlink");
+
+    cwd[len] = '\0';  // Null-terminate the string
+    printf("Current working directory: %s\n", cwd);
+
+    close(fd);
+    return 0;
 }
