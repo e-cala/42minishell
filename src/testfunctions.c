@@ -5,25 +5,26 @@
 void	test(char *line)
 {
 	int i = 0;
-	int j = 0;
 	char **cmd;
 
 	cmd = cmdtrim(line);
 	while (cmd[i])
 	{
-		printf("%s\n", cmd[i]);
+		printf("trimmed[%i]: %s\n", i, cmd[i]);
 		i++;
 	}
-	cmdsubsplit(cmdtrim(line), i);
+	/*while (cmd[i])
+		i++;*/
+	printf ("need_split(cmd): %i\n", need_split(cmd));
 	if (need_split(cmd))
 		cmd = cmdsubsplit(cmd, i);
-	while (cmd[j])
+	i = 0;
+	while (cmd[i])
 	{
-		printf("%s\n", cmd[j]);
-		j++;
+		printf("splitted[%i]: %s\n", i, cmd[i]);
+		i++;
 	}
 }
-
 
 /*
 In interactive mod:

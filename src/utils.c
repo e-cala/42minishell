@@ -6,20 +6,13 @@
 /*   By: erosas-c <erosas-c@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 17:52:38 by erosas-c          #+#    #+#             */
-/*   Updated: 2023/09/19 20:25:41 by erosas-c         ###   ########.fr       */
+/*   Updated: 2023/09/22 20:49:39 by erosas-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 #include "../includes/defines.h"
 #include "../lib/libft/libft.h"
-
-/*bool tern_true(int condition)
-{
-	if (condition == TRUE)
-		return (true);
-	return (false);
-}*/
 
 static int	next_quote(char *p, int i, char c)
 {
@@ -31,7 +24,7 @@ static int	next_quote(char *p, int i, char c)
 	return (i);
 }
 
-static int	sep_betq(char *p)
+int	sep_betq(char *p)
 {
 	int	i;
 
@@ -50,23 +43,6 @@ static int	sep_betq(char *p)
 	return (1);
 }
 
-/*
- *
- * */
-int	only_sep(char *s)
-{
-	//tern_true(ft_strlen(s) > 2 && (ft_strchr(s, '<') || ft_strchr(s, '>')))
-	if (ft_strlen(s) > 2 && (ft_strchr(s, '<') || ft_strchr(s, '>')))
-		return (0);
-	else if (ft_strlen(s) > 1 && ft_strchr(s, '|'))
-		return (0);
-	else if (ft_strlen(s) == 2 && ft_strchr(s, '<') && s[0] != s[1])
-		return (0);
-	else if (ft_strlen(s) == 2 && ft_strchr(s, '>') && s[0] != s[1])
-		return (0);
-	return (1);
-}
-
 int	out_quotes(char *s)
 {
 	if (!ft_strchr(s, '<') && !ft_strchr(s, '>') && !ft_strchr(s, '|'))
@@ -77,4 +53,35 @@ int	out_quotes(char *s)
 		return (0);
 	else
 		return (1);
+}
+
+int	splitable(char *s)
+{
+	if ((!ft_strchr(s, '<') && !ft_strchr(s, '>')
+				&& !ft_strchr(s, '|')) || only_sep(s))
+		return (0);
+	else if (!out_quotes(s))
+		return (0);
+	return (1);
+}
+
+int	count_new_ptrs(char **s)
+{
+	int	num;
+	int	i;
+
+	num = 0;
+	i = 0;
+	while (s[i])
+	{
+		if ((!ft_strchr(s[i], '<') && !ft_strchr(s[i], '>')
+				&& !ft_strchr(s[i], '|')) || only_sep(s[i]))
+			i++;
+		else
+		{
+			num++;
+			i++;
+		}
+	}
+	return (num);
 }
