@@ -6,7 +6,7 @@
 /*   By: ecabanas <ecabanas@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 18:45:32 by ecabanas          #+#    #+#             */
-/*   Updated: 2023/09/19 20:26:18 by erosas-c         ###   ########.fr       */
+/*   Updated: 2023/09/22 19:07:09 by erosas-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,25 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
-/*      prompt.c        */
+/*      prompt.c        	*/
 char	*rl_gets(char *line);
 void	loop_prompt(char *line);
 
+/*		trim functions		*/
 char	**cmdtrim(char *s);
 size_t	ft_strlen(const char *s);
 size_t	ft_strlcpy(char *restrict dst, const char *restrict src, size_t dstsize);
 int		readl_test(void);
+
+/*		subsplit functions	*/
 char	**cmdsubsplit(char **s, int len);
 int		need_split(char **s);
 int		only_sep(char *s);
 int		out_quotes(char *s);
+int		is_sep(char c);
+int		splitable(char *s);
+int		sep_betq(char *p);
+int		count_new_ptrs(char **s);
 
 /*      testfunctions.c        */
 void	test(char *line);
