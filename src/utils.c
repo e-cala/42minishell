@@ -31,12 +31,19 @@ int	sep_betq(char *p)
 	i = 0;
 	while (p[i])
 	{
+		printf("p[i]: %c\n", p[i]);
 		if ((p[i] == '<' || p[i] == '>' || p[i] == '|'))
 			return (0);
 		else if (p[i] == SQUOTE)
+		{
 			i = next_quote(p, i, SQUOTE);
+			i++;
+		}
 		else if (p[i] == DQUOTE)
+		{
 			i = next_quote(p, i, DQUOTE);
+			i++;
+		}
 		else
 			i++;
 	}
