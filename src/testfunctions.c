@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   testfunctions.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: erosas-c <erosas-c@student.42barcel>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/23 12:52:57 by erosas-c          #+#    #+#             */
+/*   Updated: 2023/09/23 12:53:02 by erosas-c         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minishell.h"
 #include "../includes/defines.h"
 #include "../lib/libft/libft.h"
@@ -15,7 +27,6 @@ void	test(char *line)
 	}
 	/*while (cmd[i])
 		i++;*/
-	printf ("need_split(cmd): %i\n", need_split(cmd));
 	if (need_split(cmd))
 		cmd = cmdsubsplit(cmd, i);
 	i = 0;

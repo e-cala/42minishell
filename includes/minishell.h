@@ -6,7 +6,7 @@
 /*   By: ecabanas <ecabanas@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 18:45:32 by ecabanas          #+#    #+#             */
-/*   Updated: 2023/09/22 19:07:09 by erosas-c         ###   ########.fr       */
+/*   Updated: 2023/09/23 12:51:44 by erosas-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,8 @@ int		readl_test(void);
 char	**cmdsubsplit(char **s, int len);
 int		need_split(char **s);
 int		only_sep(char *s);
-int		out_quotes(char *s);
 int		is_sep(char c);
 int		splitable(char *s);
-int		sep_betq(char *p);
 int		count_new_ptrs(char **s);
 
 /*      testfunctions.c        */

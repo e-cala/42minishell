@@ -6,7 +6,7 @@
 /*   By: erosas-c <erosas-c@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 17:42:52 by erosas-c          #+#    #+#             */
-/*   Updated: 2023/09/22 20:26:31 by erosas-c         ###   ########.fr       */
+/*   Updated: 2023/09/23 13:17:00 by erosas-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,39 @@ static char	*first_spl(char *tr)
 	return (sp);
 }
 
+static void	fill_two_spl(char *t, int j, char **spl)
+{
+	size_t	k;
+	size_t	len;
+
+	k = 0;
+	len = ft_strlen(t);
+	if (is_sep(t[0]))
+	{
+		spl[j++] = first_spl(t);
+		if (ft_strlen(spl[j - 1]) == 1)
+			spl[j++] = ft_substr(t, 1, len);
+		else
+			spl[j++] = ft_substr(t, 2, len - 1);
+	}
+	else if (is_sep(t[len - 1]))
+	{
+		spl[j++] = last_spl(t, len);
+		if (ft_strlen(spl[j - 1]) == len - 1)
+			spl[j++] = ft_substr(t, len - 1, 1);
+		else
+			spl[j++] = ft_substr(t, len - 2, 2);
+	
+	else
+	{
+		spl[j++] = mid_spl(t);
+		k = ft_strlen(spl[j - 1]);
+		spl[j++] = ft_substr(t, k, len - k + 1);
+	}
+	return ;
+}
+
+
 /*Receives a ** and another newly created to be returned when filled following
  * criteria in cmdsubsplit ft. String by string belonging to trm: checks if it
  * needs to be splitted, 1) if not, copies it to the current position in spl
@@ -82,16 +115,15 @@ static char	**trimtosplit(char **trm, char **spl)
 {
 	int		i;
 	int		j;
-	size_t	len;
-	size_t	k;
+//	size_t	len;
+//	size_t	k;
 
 	i = 0;
 	j = 0;
-	k = 0;
-	len = 0;
+//	k = 0;
+//	len = 0;
 	while (trm[i])
 	{
-		len = ft_strlen(trm[i]);
 		if (!splitable(trm[i]))
 		{
 			spl[j] = malloc (sizeof(char) * (len + 1));
@@ -99,7 +131,7 @@ static char	**trimtosplit(char **trm, char **spl)
 				return (NULL);
 			ft_strlcpy(spl[j++], trm[i], len + 1);
 		}
-		else if (is_sep(trm[i][0]))
+	/*	else if (is_sep(trm[i][0]))
 		{
 			spl[j++] = first_spl(trm[i]);
 			if (ft_strlen(spl[j - 1]) == 1)
@@ -119,11 +151,11 @@ static char	**trimtosplit(char **trm, char **spl)
 		{
 			spl[j++] = mid_spl(trm[i]);
 			k = ft_strlen(spl[j - 1]);
-			spl[j] = ft_substr(trm[i], k, len - k + 1);
-			j++;
-		}
+			spl[j++] = ft_substr(trm[i], k, len - k + 1);
+		}*/
 		i++;
 	}
+	spl[j] = NULL;
 	return (spl);
 }
 
@@ -148,12 +180,8 @@ char	**cmdsubsplit(char **s, int len)
 			return (NULL);
 		res = trimtosplit(s, res);
 	}
-	while (need_split(res))
-	{
-		i = 0;
-		while (res[i])
-			i++;
-		res = cmdsubsplit(res, i);
-	}
+	while (res[i])
+		i++;
+	res = cmdsubsplit(res, i);
 	return (res);
 }
