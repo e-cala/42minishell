@@ -14,69 +14,21 @@
 #include "../includes/defines.h"
 #include "../lib/libft/libft.h"
 
-static char	*mid_spl(char *tr)
+static void	fill_mid_two(char *t, int j, char **spl, size_t len)
 {
-	char	*sp;
-	int		i;
+	size_t	k;
 
-	i = 0;
-	while (tr[i] && !is_sep(tr[i]))
-		i++;
-	sp = malloc (sizeof(char) * i + 1);
-	if (!sp)
-		return (NULL);
-	sp = ft_substr(tr, 0, i);
-	return (sp);
-}
-
-static char	*last_spl(char *tr, int l)
-{
-	char	*sp;
-
-	if (tr[l - 1] == '|' || (tr[l - 1] != tr[l - 2]))
-	{
-		sp = malloc (sizeof(char) * l - 1);
-		if (!sp)
-			return (NULL);
-		sp = ft_substr(tr, 0, l - 1);
-	}
-	else
-	{
-		sp = malloc (sizeof(char) * l - 2);
-		if (!sp)
-			return (NULL);
-		sp = ft_substr(tr, 0, l - 2);
-	}
-	return (sp);
-}
-
-static char	*first_spl(char *tr)
-{
-	char	*sp;
-
-	if (tr[0] == '|' || (tr[0] != tr[1]))
-	{
-		sp = malloc (sizeof(char) + 1);
-		if (!sp)
-			return (NULL);
-		sp = ft_substr(tr, 0, 1);
-	}
-	else
-	{
-		sp = malloc (sizeof(char) * 2 + 1);
-		if (!sp)
-			return (NULL);
-		sp = ft_substr(tr, 0, 2);
-	}
-	return (sp);
+	k = 0;
+	spl[j++] = mid_spl(t);
+	k = ft_strlen(spl[j - 1]);
+	spl[j++] = ft_substr(t, k, len - k + 1);
+	return ;
 }
 
 static void	fill_two_spl(char *t, int j, char **spl)
 {
-	size_t	k;
 	size_t	len;
 
-	k = 0;
 	len = ft_strlen(t);
 	if (is_sep(t[0]))
 	{
@@ -95,11 +47,7 @@ static void	fill_two_spl(char *t, int j, char **spl)
 			spl[j++] = ft_substr(t, len - 2, 2);
 	}
 	else
-	{
-		spl[j++] = mid_spl(t);
-		k = ft_strlen(spl[j - 1]);
-		spl[j++] = ft_substr(t, k, len - k + 1);
-	}
+		fill_mid_two(t, j, spl, len);
 	return ;
 }
 
@@ -114,22 +62,17 @@ static char	**trimtosplit(char **trm, char **spl)
 {
 	int		i;
 	int		j;
-	size_t	len;
-	size_t	k;
 
 	i = 0;
 	j = 0;
-	k = 0;
-	len = 0;
 	while (trm[i])
 	{
-		len = ft_strlen(trm[i]);
 		if (!splitable(trm[i]))
 		{
-			spl[j] = malloc (sizeof(char) * (len + 1));
+			spl[j] = malloc (sizeof(char) * (ft_strlen(trm[i]) + 1));
 			if (!spl[j])
 				return (NULL);
-			ft_strlcpy(spl[j++], trm[i], len + 1);
+			ft_strlcpy(spl[j++], trm[i], ft_strlen(trm[i]) + 1);
 		}
 		else
 		{

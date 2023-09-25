@@ -37,6 +37,9 @@ int		only_sep(char *s);
 int		is_sep(char c);
 int		splitable(char *s);
 int		count_new_ptrs(char **s);
+char	*first_spl(char *tr);
+char	*last_spl(char *tr, int l);
+char	*mid_spl(char *tr);
 
 /*      testfunctions.c        */
 void	test(char *line);
