@@ -6,7 +6,7 @@
 /*   By: erosas-c <erosas-c@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 17:42:52 by erosas-c          #+#    #+#             */
-/*   Updated: 2023/09/23 13:17:00 by erosas-c         ###   ########.fr       */
+/*   Updated: 2023/09/25 20:23:42 by erosas-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,13 @@ static char	*first_spl(char *tr)
 		if (!sp)
 			return (NULL);
 		sp = ft_substr(tr, 0, 2);
+	//	printf("1st spl ELSE, sp: %s\n", sp);
 	}
+//	printf("before leaving 1st spl, sp: %s\n", sp);
 	return (sp);
 }
 
-static void	fill_two_spl(char *t, int j, char **spl)
+/*static void	fill_two_spl(char *t, int j, char **spl)
 {
 	size_t	k;
 	size_t	len;
@@ -104,7 +106,7 @@ static void	fill_two_spl(char *t, int j, char **spl)
 }
 
 
-/*Receives a ** and another newly created to be returned when filled following
+Receives a ** and another newly created to be returned when filled following
  * criteria in cmdsubsplit ft. String by string belonging to trm: checks if it
  * needs to be splitted, 1) if not, copies it to the current position in spl
  * (returned **), 2) otherwise (if yes), checks if the separator by which we
@@ -115,15 +117,16 @@ static char	**trimtosplit(char **trm, char **spl)
 {
 	int		i;
 	int		j;
-//	size_t	len;
-//	size_t	k;
+	size_t	len;
+	size_t	k;
 
 	i = 0;
 	j = 0;
-//	k = 0;
-//	len = 0;
+	k = 0;
+	len = 0;
 	while (trm[i])
 	{
+		len = ft_strlen(trm[i]);
 		if (!splitable(trm[i]))
 		{
 			spl[j] = malloc (sizeof(char) * (len + 1));
@@ -131,7 +134,7 @@ static char	**trimtosplit(char **trm, char **spl)
 				return (NULL);
 			ft_strlcpy(spl[j++], trm[i], len + 1);
 		}
-	/*	else if (is_sep(trm[i][0]))
+		else if (is_sep(trm[i][0]))
 		{
 			spl[j++] = first_spl(trm[i]);
 			if (ft_strlen(spl[j - 1]) == 1)
@@ -152,7 +155,7 @@ static char	**trimtosplit(char **trm, char **spl)
 			spl[j++] = mid_spl(trm[i]);
 			k = ft_strlen(spl[j - 1]);
 			spl[j++] = ft_substr(trm[i], k, len - k + 1);
-		}*/
+		}
 		i++;
 	}
 	spl[j] = NULL;
