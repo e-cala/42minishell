@@ -6,13 +6,35 @@
 /*   By: erosas-c <erosas-c@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 12:07:30 by erosas-c          #+#    #+#             */
-/*   Updated: 2023/09/26 12:19:47 by erosas-c         ###   ########.fr       */
+/*   Updated: 2023/09/26 17:56:07 by erosas-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 #include "../includes/defines.h"
 #include "../lib/libft/libft.h"	
+
+char	*mid_virg(char *sp)
+{
+	int		i;
+	char	*one;
+	char	*two;
+
+	i = 0;
+	one = NULL;
+	two = NULL;
+	while (sp[i] && sp[i] != '~')
+		i++;
+	one = malloc(sizeof(char) * i);
+	if (!one)
+		return (NULL);
+	one = ft_substr(sp, 0, i);
+	two = malloc(sizeof(char) * (ft_strlen(sp) - i - 1));
+	if (!two)
+		return (NULL);
+	two = ft_substr(sp, i + 1, ft_strlen(sp) - i - 1);
+	return (ft_strjoin(ft_strjoin(one, "$HOME"), two));
+}
 
 int	some_virg_outq(char *p)
 {
@@ -45,6 +67,7 @@ int	expandable(char *s)
 		return (0);
 }
 
+/*Checks if any of the strings splitted includes ~ not between quotes*/
 int	need_expand(char **s)
 {
 	int	i;

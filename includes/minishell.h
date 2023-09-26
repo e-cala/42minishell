@@ -6,7 +6,7 @@
 /*   By: ecabanas <ecabanas@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 18:45:32 by ecabanas          #+#    #+#             */
-/*   Updated: 2023/09/26 12:23:54 by erosas-c         ###   ########.fr       */
+/*   Updated: 2023/09/26 17:41:22 by erosas-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,9 @@ int		next_quote(char *p, int i, char c);
 
 /*		expander functions	*/
 int		need_expand(char **s);
-
+int		expandable(char *s);
+char	**cmdexpand(char **s, int len);
+char	*mid_virg(char *sp);
 
 /*      testfunctions.c        */
 void	test(char *line);
