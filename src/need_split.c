@@ -6,7 +6,7 @@
 /*   By: erosas-c <erosas-c@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 13:10:36 by erosas-c          #+#    #+#             */
-/*   Updated: 2023/09/23 12:42:37 by erosas-c         ###   ########.fr       */
+/*   Updated: 2023/09/26 12:23:15 by erosas-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "../includes/defines.h"
 #include "../lib/libft/libft.h"	
 
-static int	next_quote(char *p, int i, char c)
+int	next_quote(char *p, int i, char c)
 {
 	i++;
 	while (p[i] && p[i] != c)
