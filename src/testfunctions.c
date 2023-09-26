@@ -6,7 +6,7 @@
 /*   By: erosas-c <erosas-c@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 12:52:57 by erosas-c          #+#    #+#             */
-/*   Updated: 2023/09/26 17:52:05 by erosas-c         ###   ########.fr       */
+/*   Updated: 2023/09/26 19:06:25 by erosas-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,20 @@ void	test(char *line)
 	char **cmd;
 
 	cmd = cmdtrim(line);
-	while (cmd[i])
+	/*while (cmd[i])
 	{
 		printf("trimmed[%i]: %s\n", i, cmd[i]);
 		i++;
-	}
-	/*while (cmd[i])
-		i++;*/
-//	if (need_split(cmd))
+	}*/
+	while (cmd[i])
+		i++;
 	cmd = cmdsubsplit(cmd, i);
-	i = 0;
+	/*i = 0;
 	while (cmd[i])
 	{
 		printf("splitted[%i]: %s\n", i, cmd[i]);
 		i++;
-	}
+	}*/
 	cmd = cmdexpand(cmd, i);
 	i = 0;
 	while (cmd[i])
@@ -42,10 +41,11 @@ void	test(char *line)
 		printf("home_expanded[%i]: %s\n", i, cmd[i]);
 		i++;
 	}
+	//cmd = get_var(cmd, i);
 }
 
 /*
-In interactive mod:
+In interactive mode:
 ctrl-C: displays a new prompt on a new line
 ctrl-D: exits the shell
 ctrl-\: does nothing
