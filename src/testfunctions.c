@@ -6,7 +6,7 @@
 /*   By: erosas-c <erosas-c@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 12:52:57 by erosas-c          #+#    #+#             */
-/*   Updated: 2023/09/23 12:53:02 by erosas-c         ###   ########.fr       */
+/*   Updated: 2023/09/26 17:52:05 by erosas-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,19 @@ void	test(char *line)
 	}
 	/*while (cmd[i])
 		i++;*/
-	if (need_split(cmd))
-		cmd = cmdsubsplit(cmd, i);
+//	if (need_split(cmd))
+	cmd = cmdsubsplit(cmd, i);
 	i = 0;
 	while (cmd[i])
 	{
 		printf("splitted[%i]: %s\n", i, cmd[i]);
+		i++;
+	}
+	cmd = cmdexpand(cmd, i);
+	i = 0;
+	while (cmd[i])
+	{
+		printf("home_expanded[%i]: %s\n", i, cmd[i]);
 		i++;
 	}
 }
