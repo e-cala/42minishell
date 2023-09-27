@@ -6,31 +6,13 @@
 /*   By: erosas-c <erosas-c@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 12:05:20 by erosas-c          #+#    #+#             */
-/*   Updated: 2023/09/26 19:21:00 by erosas-c         ###   ########.fr       */
+/*   Updated: 2023/09/27 19:28:04 by erosas-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 #include "../includes/defines.h"
 #include "../lib/libft/libft.h"	
-
-static char	*end_virg(char *s)
-{
-	char	*one;
-	char	*two;
-
-	one = NULL;
-	two = NULL;
-	one = malloc(sizeof(char) * 6);
-	if (!one)
-		return (NULL);
-	one = "$HOME";
-	two = malloc(sizeof(char) * ft_strlen(s));
-	if (!two)
-		return (NULL);
-	two = ft_substr(s, 0, ft_strlen(s) - 1);
-	return (ft_strjoin(two, one));
-}
 
 static char	*init_virg(char *s)
 {
@@ -62,12 +44,10 @@ static char	*virgtohome(char *spl, int j, char **exp)
 
 	len = ft_strlen(spl);
 	i = 0;
-	if (spl[0] == '~')
-		exp[j] = init_virg(spl);
-	else if (spl[len - 1] == '~')
-		exp[j] = end_virg(spl);
+	if (len == 1)
+		return ("$HOME");
 	else
-		exp[j] = mid_virg(spl);
+		exp[j] = init_virg(spl);
 	return (exp[j]);
 }
 
@@ -98,8 +78,10 @@ static char	**spltoexp(char **spl, char **exp)
 	return (exp);
 }
 
-/*Converts the splitted ** into a new one replacing all ~ instances with $HOME
- *but only if they are not between quotes*/
+/* Converts the splitted ** into a new one replacing all ~ instances with $HOME
+ * but only if they are not between quotes. Seen that BASH only converts ~ to
+ * $HOME when it's alone in the "string"
+ */
 char	**cmdexpand(char **s, int len)
 {
 	char	**res;
