@@ -6,7 +6,7 @@
 /*   By: ecabanas <ecabanas@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 18:45:32 by ecabanas          #+#    #+#             */
-/*   Updated: 2023/09/26 18:53:16 by erosas-c         ###   ########.fr       */
+/*   Updated: 2023/09/27 18:35:29 by erosas-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,11 @@ int		expandable(char *s);
 char	**cmdexpand(char **s, int len);
 char	*mid_virg(char *sp);
 int		need_var(char **s);
+int		has_var(char *s);
+char	**repl_var(char **s, int len);
+char	*mid_dlr(char *s);
+char	*var_name(char	*p, int aft_dl);
+
 
 
 /*      testfunctions.c        */

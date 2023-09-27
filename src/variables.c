@@ -6,7 +6,7 @@
 /*   By: erosas-c <erosas-c@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 18:38:16 by erosas-c          #+#    #+#             */
-/*   Updated: 2023/09/26 19:19:37 by erosas-c         ###   ########.fr       */
+/*   Updated: 2023/09/27 18:58:40 by erosas-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,42 +14,48 @@
 #include "../includes/defines.h"
 #include "../lib/libft/libft.h"	
 
+char	*var_name(char	*p, int aft_dl)
+{
+	int		i;
+	char	*res;
+
+	res = NULL;
+	i = aft_dl;
+	while (p[i] && ((ft_isalnum(p[i]) || p[i] == '_')))
+		i++;
+	return (ft_substr(p, aft_dl, i - aft_dl));
+}
+
 static char	*init_dlr(char *s)
 {
-/*	char	*one;
+	char	*one;
 	char	*two;
+	size_t	vname_l;
 
-	one = NULL;
+	one = getenv(var_name(s, 1));
 	two = NULL;
-	if (ft_strlen(s) == 1)
-		return (s);
+	vname_l = ft_strlen(var_name(s, 1));
+	if (ft_strlen(s) == vname_l + 1)
+		return (one);
 	else
 	{
-		one = malloc(sizeof(char) * 6);
-		if (!one)
-			return (NULL);
-		one = "$HOME";
 		two = malloc(sizeof(char) * ft_strlen(s));
 		if (!two)
 			return (NULL);
-		two = ft_substr(s, 1, ft_strlen(s) - 1);
-		return (ft_strjoin(one, two));
-	}*/
+		two = ft_substr(s, vname_l + 1, ft_strlen(s) - vname_l);
+	}
+	return (ft_strjoin(one, two));
 }
 
 static char	*put_val(char *dl, int j, char **val)
 {
-	size_t	len;
 	int		i;
 
-	len = ft_strlen(dl);
 	i = 0;
 	if (dl[0] == '$')
 		val[j] = init_dlr(dl);
-/*	else if (spl[len - 1] == '~')
-		exp[j] = end_virg(spl);
 	else
-		exp[j] = mid_virg(spl);*/
+		val[j] = mid_dlr(dl);
 	return (val[j]);
 }
 
@@ -64,10 +70,10 @@ static char	**nametoval(char **dlr, char **val)
 	{
 		if (!has_var(dlr[i]))
 		{
-			val[j] = malloc (sizeof(char) * (ft_strlen(spl[i]) + 1));
+			val[j] = malloc (sizeof(char) * (ft_strlen(dlr[i]) + 1));
 			if (!val[j])
 				return (NULL);
-			ft_strlcpy(val[j++], drl[i], ft_strlen(dlr[i]) + 1);
+			ft_strlcpy(val[j++], dlr[i], ft_strlen(dlr[i]) + 1);
 		}
 		else
 		{
@@ -76,11 +82,11 @@ static char	**nametoval(char **dlr, char **val)
 		}
 		i++;
 	}
-	exp[j] = NULL;
-	return (exp);
+	val[j] = NULL;
+	return (val);
 }
 
-char	**repl_var(char **s)
+char	**repl_var(char **s, int len)
 {
 	char	**res;
 	int		i;
