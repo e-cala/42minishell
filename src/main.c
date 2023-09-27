@@ -14,7 +14,7 @@
 #include "../includes/defines.h"
 #include <fcntl.h>
 
- int main(int argc, char **argv, char **envp)
+int main(int argc, char **argv, char **envp)
 {
 	(void)argv;
 	(void)argc;

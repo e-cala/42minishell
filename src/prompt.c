@@ -14,6 +14,16 @@
 #include "../includes/defines.h"
 #include "../lib/libft/libft.h"
 
+static int ft_strcmp(char *s1, char *s2) {
+    while (*s1 && (*s1 == *s2))
+	{
+        s1++;
+        s2++;
+    }
+
+    return *(unsigned char *)s1 - *(unsigned char *)s2;
+}
+
 char	*rl_gets(char *line)
 {
 	if (line)
@@ -21,7 +31,7 @@ char	*rl_gets(char *line)
 		free(line);
 		line = NULL;
 	}
-	line = readline("minishell- ");
+	line = readline("minishell~ ");
 	if (line && *line)
 		add_history(line);
 	return (line);
@@ -33,12 +43,14 @@ void	loop_prompt(char *line)
 	if (line == NULL)
 	{
 		line = rl_gets(line);
-		test(line);			// Change test function
+		ft_echo(line);
+		//test(line);			// Change test function
 	}
-	while (ft_strncmp(line, "exit", 4) != 0)
+	while (ft_strcmp(line, "exit") != 0)
 	{
 		line = rl_gets(line);
-		test(line);			// Change test function
+		ft_echo(line);
+		//test(line);			// Change test function
 	}
 	free(line);
 	return ;
