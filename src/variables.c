@@ -6,7 +6,7 @@
 /*   By: erosas-c <erosas-c@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 18:38:16 by erosas-c          #+#    #+#             */
-/*   Updated: 2023/09/27 19:32:01 by erosas-c         ###   ########.fr       */
+/*   Updated: 2023/09/28 11:44:46 by erosas-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,19 @@ static char	*init_dlr(char *s)
 	two = NULL;
 	vname_l = ft_strlen(var_name(s, 1));
 	if (ft_strlen(s) == vname_l + 1)
+	{
+		free(s);
 		return (one);
+	}
 	else
 	{
 		two = malloc(sizeof(char) * ft_strlen(s));
 		if (!two)
 			return (NULL);
 		two = ft_substr(s, vname_l + 1, ft_strlen(s) - vname_l);
+		free(s);
+		return (ft_strjoin(one, two));
 	}
-	return (ft_strjoin(one, two));
 }
 
 static char	*put_val(char *dl, int j, char **val)
@@ -101,14 +105,14 @@ char	**repl_var(char **s, int len)
 		if (!res)
 			return (NULL);
 		res = nametoval(s, res);
+		while (res[i])
+			i++;
+		if (need_var(res))
+			res = repl_var(res, i);
+		i = 0;
+		while (s[i])
+			i++;
+		free_all(s, i);
+		return (res);
 	}
-	while (res[i])
-		i++;
-	if (need_var(res))
-		res = repl_var(res, i);
-	i = 0;
-	while (s[i])
-		i++;
-	free_all(s, i);
-	return (res);
 }

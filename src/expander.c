@@ -6,7 +6,7 @@
 /*   By: erosas-c <erosas-c@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 12:05:20 by erosas-c          #+#    #+#             */
-/*   Updated: 2023/09/27 19:28:04 by erosas-c         ###   ########.fr       */
+/*   Updated: 2023/09/28 11:39:48 by erosas-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,6 @@ static char	*init_virg(char *s)
 		return (s);
 	else
 	{
-		one = malloc(sizeof(char) * 6);
-		if (!one)
-			return (NULL);
 		one = "$HOME";
 		two = malloc(sizeof(char) * ft_strlen(s));
 		if (!two)
@@ -97,14 +94,16 @@ char	**cmdexpand(char **s, int len)
 		if (!res)
 			return (NULL);
 		res = spltoexp(s, res);
+		while (res[i])
+			i++;
+		if (need_expand(res))
+		{
+			res = cmdexpand(res, i);
+		}
+		i = 0;
+		while (s[i])
+			i++;
+		free_all(s, i);
+		return (res);
 	}
-	while (res[i])
-		i++;
-	if (need_expand(res))
-		res = cmdexpand(res, i);
-	i = 0;
-	while (s[i])
-		i++;
-	free_all(s, i);
-	return (res);
 }
